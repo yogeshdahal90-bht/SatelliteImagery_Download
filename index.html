@@ -3,145 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yogesh Dahal | Spatial Hub</title>
+    <title>Satelite Image downloader </title>
     <style>
-        :root {
-            --bg: #0f172a;
-            --sidebar: #1e293b;
-            --accent: #f97316;
-            --text: #f8fafc;
-        }
-
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
             margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
+            flex-direction: column;
             height: 100vh;
-            overflow: hidden;
         }
 
-        /* --- SIDEBAR NAVIGATION --- */
-        nav {
-            width: 280px;
-            background: var(--sidebar);
-            border-right: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
+        .header {
+            text-align: center;
+            padding: 20px 10px;
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 10;
         }
 
-        .nav-header { text-align: center; margin-bottom: 30px; }
-        .nav-header h1 { font-size: 1.5rem; margin: 0; color: var(--accent); }
-        .nav-header p { font-size: 0.8rem; opacity: 0.7; margin: 5px 0; }
-
-        .nav-btn {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.1);
-            color: var(--text);
-            padding: 12px 15px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            text-align: left;
-            transition: 0.3s;
-            font-weight: 500;
+        .header h1 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 24px;
+            letter-spacing: 1px;
         }
 
-        .nav-btn:hover, .nav-btn.active {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: white;
-            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
-        }
-
-        /* --- MAIN CONTENT AREA --- */
-        main {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
+        .header p {
+            margin: 5px 0 0;
+            color: #7f8c8d;
+            font-size: 14px;
         }
 
         .app-container {
             flex-grow: 1;
             position: relative;
-            background: #000;
+            margin: 20px auto;
+            width: 95%;
+            max-width: 1400px;
             border-radius: 12px;
-            border: 1px solid #334155;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border: 1px solid #dcdde1;
         }
 
         iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             border: none;
         }
 
-        .info-bar { margin-bottom: 15px; }
-        .info-bar h2 { margin: 0; font-size: 1.2rem; }
-        .info-bar p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.6; }
-
-        footer { font-size: 0.7rem; opacity: 0.4; margin-top: 15px; text-align: center; }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            color: #95a5a6;
+        }
     </style>
 </head>
 <body>
 
-<nav>
-    <div class="nav-header">
-        <h1>SPATIAL HUB</h1>
-        <p>Yogesh Dahal | Spatial Investigator</p>
-    </div>
-
-    <!-- Buttons to switch the Iframe source -->
-    <button class="nav-btn active" onclick="loadApp('Global Change Explorer', 'Use tools on the left to generate historical timelapses.', 'https://ee-yogeshdahal90.projects.earthengine.app/view/timelapse', this)">
-        ⏳ Timelapse Explorer
-    </button>
-
-    <button class="nav-btn" onclick="loadApp('Satellite Imagery Downloader', 'Select and download high-resolution multispectral data.', 'https://ee-yogeshdahal90.projects.earthengine.app/view/satellite-imagery', this)">
-        🛰️ Image Downloader
-    </button>
-
-    <button class="nav-btn" onclick="loadApp('Contour Creator', 'Generate precise topographic maps for any location.', 'https://yogeshdahal90-bht.github.io/contourcreator/', this)">
-        ⛰️ Contour Creator
-    </button>
-
-    <button class="nav-btn" onclick="loadApp('HD Asset Snap', '16:9 Sentinel-2 asset capture tool.', 'https://yogeshdahal90-bht.github.io/Sateliteimage/', this)">
-        📸 HD Asset Snap
-    </button>
-    
-    <div style="flex-grow: 1;"></div>
-    <footer>© 2026 Everything Science</footer>
-</nav>
-
-<main>
-    <div class="info-bar">
-        <h2 id="app-title">Global Change Explorer</h2>
-        <p id="app-desc">Use the tools on the left to draw an area and generate a historical timelapse from satellite data.</p>
+    <div class="header">
+        <h1>⛰️ Satelite imagery downloader</h1>
+        <p>Any month, any year, free satelite imagery | Engineered by Yogesh Dahal</p>
     </div>
 
     <div class="app-container">
-        <iframe id="main-frame" src="https://ee-yogeshdahal90.projects.earthengine.app/view/timelapse" allowfullscreen></iframe>
+        <iframe src="https://ee-yogeshdahal90.projects.earthengine.app/view/satellite-imagery" allowfullscreen></iframe>
     </div>
-</main>
 
-<script>
-    function loadApp(title, desc, url, btn) {
-        // Update Content
-        document.getElementById('app-title').innerText = title;
-        document.getElementById('app-desc').innerText = desc;
-        document.getElementById('main-frame').src = url;
-
-        // Update Active Button UI
-        var buttons = document.getElementsByClassName('nav-btn');
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].classList.remove('active');
-        }
-        btn.classList.add('active');
-    }
-</script>
+    <div class="footer">
+        Powered by Google Earth Engine & Sentinel 2 data
+    </div>
 
 </body>
 </html>
